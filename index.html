@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nguyen's Space</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    color: #e6edf3;
+    background: radial-gradient(circle at 15% 10%, #172554 0, transparent 30%),
+                radial-gradient(circle at 85% 30%, #1e1b4b 0, transparent 28%), #080c14;
+    min-height: 100vh;
+}
+a { color: inherit; text-decoration: none; }
+nav {
+    position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between;
+    align-items: center; max-width: 1100px; margin: auto; padding: 20px 24px;
+    background: rgba(8,12,20,.65); backdrop-filter: blur(16px);
+}
+.logo { font-size: 20px; font-weight: 700; }
+.nav-links { display: flex; gap: 24px; color: #9da7b3; }
+.nav-links a:hover { color: white; }
+.container { max-width: 1050px; margin: auto; padding: 0 24px; }
+.hero { min-height: 72vh; display: flex; flex-direction: column; justify-content: center; }
+.badge {
+    display: inline-block; width: fit-content; padding: 7px 13px; margin-bottom: 22px;
+    border: 1px solid #30363d; border-radius: 100px; color: #8b949e;
+    background: rgba(255,255,255,.03);
+}
+.hero h1 { font-size: clamp(46px, 8vw, 82px); line-height: 1.05; letter-spacing: -3px; }
+.gradient {
+    background: linear-gradient(90deg, #58a6ff, #a371f7);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero p { max-width: 680px; margin-top: 24px; color: #9da7b3; font-size: 19px; line-height: 1.8; }
+.buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.button {
+    padding: 12px 20px; border: 1px solid #30363d; border-radius: 9px;
+    background: #161b22; transition: .2s;
+}
+.button.primary { background: #238636; border-color: #2ea043; }
+.button:hover { transform: translateY(-2px); filter: brightness(1.15); }
+section { padding: 75px 0; }
+.section-title { font-size: 30px; margin-bottom: 30px; }
+.section-title span { color: #58a6ff; }
+.skills { display: flex; flex-wrap: wrap; gap: 12px; }
+.skill {
+    padding: 10px 15px; background: #111720; border: 1px solid #30363d;
+    border-radius: 8px; color: #c9d1d9;
+}
+.projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.card {
+    padding: 25px; border: 1px solid #30363d; border-radius: 14px;
+    background: rgba(22,27,34,.72); transition: .25s;
+}
+.card:hover { transform: translateY(-5px); border-color: #58a6ff; }
+.card h3 { margin-bottom: 12px; font-size: 20px; }
+.card p { color: #8b949e; line-height: 1.7; }
+.tag { display: inline-block; margin-top: 18px; color: #58a6ff; font-size: 14px; }
+.about { color: #9da7b3; line-height: 2; max-width: 760px; }
+footer {
+    margin-top: 40px; padding: 35px 20px; border-top: 1px solid #21262d;
+    text-align: center; color: #6e7681;
+}
+@media (max-width: 700px) {
+    .projects { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero { min-height: 65vh; }
+    .hero h1 { letter-spacing: -2px; }
+}
+</style>
+</head>
+<body>
+<nav>
+    <div class="logo">&lt;/ Nguyen's Space &gt;</div>
+    <div class="nav-links">
+        <a href="#about">关于</a>
+        <a href="#skills">技术栈</a>
+        <a href="#projects">项目</a>
+        <a href="https://github.com/villager1314">GitHub</a>
+    </div>
+</nav>
+<main class="container">
+<section class="hero">
+    <div class="badge">👋 Welcome to Nguyen's Space</div>
+    <h1>Hello, I'm Nguyen.<br><span class="gradient">Security Researcher &amp; Builder.</span></h1>
+    <p>
+        我是 Minh Tu Nguyen（GitHub: @villager1314）。
+        关注 Android 与 Linux 内核安全、CVE 分析、ARM 设备研究，
+        也会开发跨平台工具，把研究过程整理成可复现的开源项目。
+    </p>
+    <div class="buttons">
+        <a class="button primary" href="https://github.com/villager1314">GitHub →</a>
+        <a class="button" href="#projects">查看项目</a>
+    </div>
+</section>
+<section id="about">
+    <h2 class="section-title"><span>01.</span> About Me</h2>
+    <div class="about">
+        <p>我是一名对漏洞研究、Android/Linux 系统与嵌入式设备感兴趣的开发者，喜欢分析底层机制并记录完整的验证过程。</p>
+        <p>目前的项目涵盖 Linux 内核 CVE、Unisoc 芯片平台、RK3566 设备，以及 Android 和 Windows 离线工具。</p>
+    </div>
+</section>
+<section id="skills">
+    <h2 class="section-title"><span>02.</span> Tech Stack</h2>
+    <div class="skills">
+        <div class="skill">C</div>
+        <div class="skill">Python</div>
+        <div class="skill">Linux</div>
+        <div class="skill">Git</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">Shell</div>
+        <div class="skill">Android</div>
+        <div class="skill">Kernel Security</div>
+    </div>
+</section>
+<section id="projects">
+    <h2 class="section-title"><span>03.</span> Projects</h2>
+    <div class="projects">
+        <a class="card" href="https://github.com/villager1314/Viet-Nom">
+            <h3>🇻🇳 越喃 · Việt Nôm</h3>
+            <p>离线越南国语字转汉喃工具，提供 Android 与 Windows 版本，并支持内置字体和离线越南语朗读。</p>
+            <span class="tag">JavaScript · Android · Windows →</span>
+        </a>
+        <a class="card" href="https://github.com/villager1314/CVE-2026-64560-Analysis">
+            <h3>🛡️ CVE-2026-64560 Analysis</h3>
+            <p>Linux 内核 posix-cpu-timers 竞态 UAF 的技术分析、修复补丁与防御验证型 PoC。</p>
+            <span class="tag">C · Linux Kernel · 60 Stars →</span>
+        </a>
+        <a class="card" href="https://github.com/villager1314/HanVon-N10-touch-2024-rk3566-Archive">
+            <h3>📱 Hanvon N10 / RK3566</h3>
+            <p>汉王 N10 Touch 2024 与 RK3566 平台的设备研究和技术资料归档。</p>
+            <span class="tag">Python · RK3566 · MIT →</span>
+        </a>
+        <a class="card" href="https://github.com/villager1314/unisoc-sc9832a-analysis">
+            <h3>🔬 Unisoc SC9832A Analysis</h3>
+            <p>围绕 Unisoc SC9832A 平台整理的设备分析、实验记录与研究资料。</p>
+            <span class="tag">Unisoc · Android · Research →</span>
+        </a>
+    </div>
+</section>
+</main>
+<footer>
+    Built with ☕ &amp; curiosity
+    <br><br>
+    © 2026 · Hosted on GitHub Pages
+</footer>
+</body>
+</html>
