@@ -1,112 +1,919 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nguyen's Space</title>
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
-    color: #e6edf3;
-    background: radial-gradient(circle at 15% 10%, #172554 0, transparent 30%),
-                radial-gradient(circle at 85% 30%, #1e1b4b 0, transparent 28%), #080c14;
-    min-height: 100vh;
-}
-a { color: inherit; text-decoration: none; }
-nav {
-    position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between;
-    align-items: center; max-width: 1100px; margin: auto; padding: 20px 24px;
-    background: rgba(8,12,20,.65); backdrop-filter: blur(16px);
-}
-.logo { font-size: 20px; font-weight: 700; }
-.nav-links { display: flex; gap: 24px; color: #9da7b3; }
-.nav-links a:hover { color: white; }
-.container { max-width: 1050px; margin: auto; padding: 0 24px; }
-.hero { min-height: 72vh; display: flex; flex-direction: column; justify-content: center; }
-.badge {
-    display: inline-block; width: fit-content; padding: 7px 13px; margin-bottom: 22px;
-    border: 1px solid #30363d; border-radius: 100px; color: #8b949e;
-    background: rgba(255,255,255,.03);
-}
-.hero h1 { font-size: clamp(46px, 8vw, 82px); line-height: 1.05; letter-spacing: -3px; }
-.gradient {
-    background: linear-gradient(90deg, #58a6ff, #a371f7);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-}
-.hero p { max-width: 680px; margin-top: 24px; color: #9da7b3; font-size: 19px; line-height: 1.8; }
-.buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
-.button {
-    padding: 12px 20px; border: 1px solid #30363d; border-radius: 9px;
-    background: #161b22; transition: .2s;
-}
-.button.primary { background: #238636; border-color: #2ea043; }
-.button:hover { transform: translateY(-2px); filter: brightness(1.15); }
-section { padding: 75px 0; }
-.section-title { font-size: 30px; margin-bottom: 30px; }
-.section-title span { color: #58a6ff; }
-.skills { display: flex; flex-wrap: wrap; gap: 12px; }
-.skill {
-    padding: 10px 15px; background: #111720; border: 1px solid #30363d;
-    border-radius: 8px; color: #c9d1d9;
-}
-.projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-.card {
-    padding: 25px; border: 1px solid #30363d; border-radius: 14px;
-    background: rgba(22,27,34,.72); transition: .25s;
-}
-.card:hover { transform: translateY(-5px); border-color: #58a6ff; }
-.card h3 { margin-bottom: 12px; font-size: 20px; }
-.card p { color: #8b949e; line-height: 1.7; }
-.tag { display: inline-block; margin-top: 18px; color: #58a6ff; font-size: 14px; }
-.about { color: #9da7b3; line-height: 2; max-width: 760px; }
-footer {
-    margin-top: 40px; padding: 35px 20px; border-top: 1px solid #21262d;
-    text-align: center; color: #6e7681;
-}
-@media (max-width: 700px) {
-    .projects { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
-    .hero { min-height: 65vh; }
-    .hero h1 { letter-spacing: -2px; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#0f1115">
+  <meta name="description" content="Nguyen's Space - Android, Linux, Kernel Security and Open Source Research.">
+
+  <title>Nguyen's Space</title>
+
+  <style>
+    :root {
+      --md-primary: #a8c7fa;
+      --md-on-primary: #062e6f;
+
+      --md-primary-container: #0b57d0;
+      --md-on-primary-container: #d3e3fd;
+
+      --md-secondary: #c2c7d0;
+      --md-secondary-container: #30343b;
+
+      --md-surface: #0f1115;
+      --md-surface-1: #15171c;
+      --md-surface-2: #1b1d23;
+      --md-surface-3: #202329;
+
+      --md-outline: #44474e;
+      --md-outline-light: #5f6368;
+
+      --md-on-surface: #e3e3e3;
+      --md-on-surface-variant: #c4c7c5;
+
+      --md-success: #6dd58c;
+      --md-warning: #ffcf70;
+
+      --radius-small: 12px;
+      --radius-medium: 18px;
+      --radius-large: 28px;
+      --radius-full: 999px;
+
+      --shadow-1:
+        0 1px 2px rgba(0,0,0,.3),
+        0 2px 6px rgba(0,0,0,.18);
+
+      --shadow-2:
+        0 8px 28px rgba(0,0,0,.28);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Microsoft YaHei",
+        sans-serif;
+
+      color: var(--md-on-surface);
+      background:
+        radial-gradient(
+          circle at 15% 5%,
+          rgba(11,87,208,.18),
+          transparent 34%
+        ),
+        radial-gradient(
+          circle at 90% 25%,
+          rgba(103,80,164,.16),
+          transparent 30%
+        ),
+        var(--md-surface);
+
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* =========================
+       Navigation
+    ========================= */
+
+    .topbar-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 12px 0;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(15,17,21,.72);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+
+    .topbar {
+      width: min(1120px, calc(100% - 40px));
+      margin: auto;
+
+      min-height: 64px;
+      padding: 8px 10px 8px 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius-large);
+
+      background: rgba(27,29,35,.74);
+      box-shadow: var(--shadow-1);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: -.3px;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+
+      display: grid;
+      place-items: center;
+
+      color: var(--md-on-primary-container);
+      background:
+        linear-gradient(
+          135deg,
+          var(--md-primary-container),
+          #6750a4
+        );
+
+      font-size: 18px;
+      box-shadow: var(--shadow-1);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      padding: 10px 15px;
+      border-radius: var(--radius-full);
+
+      color: var(--md-on-surface-variant);
+      font-size: 14px;
+
+      transition:
+        background .18s ease,
+        color .18s ease,
+        transform .18s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--md-on-surface);
+      background: rgba(168,199,250,.10);
+    }
+
+    .nav-links .github-link {
+      margin-left: 4px;
+      color: var(--md-on-primary);
+      background: var(--md-primary);
+      font-weight: 600;
+    }
+
+    .nav-links .github-link:hover {
+      color: var(--md-on-primary);
+      background: #bfd6fb;
+      transform: translateY(-1px);
+    }
+
+    /* =========================
+       Hero
+    ========================= */
+
+    .hero {
+      min-height: 78vh;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding: 90px 0 70px;
+    }
+
+    .hero-badge {
+      width: fit-content;
+
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 8px 14px;
+      margin-bottom: 26px;
+
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(168,199,250,.16);
+
+      color: var(--md-primary);
+      background: rgba(168,199,250,.07);
+
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+
+      background: var(--md-success);
+
+      box-shadow:
+        0 0 0 4px rgba(109,213,140,.12),
+        0 0 14px rgba(109,213,140,.45);
+    }
+
+    .hero h1 {
+      max-width: 980px;
+
+      font-size: clamp(48px, 8vw, 88px);
+      line-height: 1.04;
+      letter-spacing: -4px;
+
+      font-weight: 750;
+    }
+
+    .gradient-text {
+      background:
+        linear-gradient(
+          90deg,
+          #a8c7fa 0%,
+          #d0bcff 48%,
+          #f2b8b5 100%
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 760px;
+
+      margin-top: 28px;
+
+      color: var(--md-on-surface-variant);
+
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: 1.9;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+
+      margin-top: 34px;
+    }
+
+    .md-button {
+      min-height: 48px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+
+      padding: 0 20px;
+
+      border-radius: var(--radius-full);
+
+      font-size: 15px;
+      font-weight: 600;
+
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
+    }
+
+    .md-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .md-button.filled {
+      color: var(--md-on-primary);
+      background: var(--md-primary);
+      box-shadow: var(--shadow-1);
+    }
+
+    .md-button.filled:hover {
+      background: #bfd6fb;
+      box-shadow: var(--shadow-2);
+    }
+
+    .md-button.tonal {
+      color: var(--md-on-surface);
+      background: var(--md-secondary-container);
+    }
+
+    .md-button.tonal:hover {
+      background: #3b4048;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      margin-top: 30px;
+    }
+
+    .meta-chip {
+      padding: 8px 13px;
+
+      border-radius: var(--radius-full);
+
+      color: var(--md-on-surface-variant);
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.07);
+
+      font-size: 13px;
+    }
+
+    /* =========================
+       Sections
+    ========================= */
+
+    section {
+      scroll-margin-top: 100px;
+      padding: 78px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+
+      margin-bottom: 32px;
+    }
+
+    .section-number {
+      min-width: 42px;
+      height: 42px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 14px;
+
+      color: var(--md-on-primary-container);
+      background: rgba(11,87,208,.35);
+
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(28px, 4vw, 36px);
+      letter-spacing: -1.2px;
+    }
+
+    .section-subtitle {
+      margin-top: 3px;
+
+      color: var(--md-on-surface-variant);
+      font-size: 14px;
+    }
+
+    /* =========================
+       About
+    ========================= */
+
+    .about-card {
+      padding: 30px;
+
+      border-radius: var(--radius-large);
+      border: 1px solid rgba(255,255,255,.07);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(32,35,41,.95),
+          rgba(21,23,28,.9)
+        );
+
+      box-shadow: var(--shadow-1);
+    }
+
+    .about-card p {
+      max-width: 830px;
+
+      color: var(--md-on-surface-variant);
+      line-height: 2;
+
+      font-size: 17px;
+    }
+
+    .about-card p + p {
+      margin-top: 14px;
+    }
+
+    /* =========================
+       Tech Stack
+    ========================= */
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      min-height: 42px;
+
+      padding: 0 15px;
+
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255,255,255,.08);
+
+      color: var(--md-on-surface);
+      background: var(--md-surface-2);
+
+      font-size: 14px;
+      font-weight: 500;
+
+      transition:
+        background .2s ease,
+        transform .2s ease,
+        border-color .2s ease;
+    }
+
+    .skill::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: var(--md-primary);
+    }
+
+    .skill:hover {
+      transform: translateY(-2px);
+      border-color: rgba(168,199,250,.35);
+      background: var(--md-surface-3);
+    }
+
+    /* =========================
+       Projects
+    ========================= */
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+
+      min-height: 250px;
+
+      display: flex;
+      flex-direction: column;
+
+      padding: 26px;
+
+      border-radius: var(--radius-large);
+      border: 1px solid rgba(255,255,255,.07);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(32,35,41,.92),
+          rgba(21,23,28,.94)
+        );
+
+      box-shadow: var(--shadow-1);
+
+      transition:
+        transform .24s ease,
+        border-color .24s ease,
+        box-shadow .24s ease;
+    }
+
+    .project-card::after {
+      content: "";
+
+      position: absolute;
+      width: 190px;
+      height: 190px;
+
+      right: -90px;
+      top: -90px;
+
+      border-radius: 50%;
+
+      background: rgba(168,199,250,.08);
+
+      transition:
+        transform .35s ease,
+        background .35s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+
+      border-color: rgba(168,199,250,.35);
+
+      box-shadow: var(--shadow-2);
+    }
+
+    .project-card:hover::after {
+      transform: scale(1.25);
+      background: rgba(168,199,250,.13);
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 24px;
+    }
+
+    .project-icon {
+      width: 48px;
+      height: 48px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 16px;
+
+      background: rgba(168,199,250,.10);
+
+      font-size: 22px;
+    }
+
+    .project-arrow {
+      color: var(--md-on-surface-variant);
+      font-size: 21px;
+
+      transition: transform .2s ease;
+    }
+
+    .project-card:hover .project-arrow {
+      transform: translate(4px, -4px);
+    }
+
+    .project-card h3 {
+      position: relative;
+      z-index: 2;
+
+      margin-bottom: 10px;
+
+      font-size: 21px;
+      letter-spacing: -.4px;
+    }
+
+    .project-card p {
+      position: relative;
+      z-index: 2;
+
+      flex: 1;
+
+      color: var(--md-on-surface-variant);
+      line-height: 1.75;
+    }
+
+    .project-tags {
+      position: relative;
+      z-index: 2;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+
+      margin-top: 22px;
+    }
+
+    .project-tag {
+      padding: 6px 10px;
+
+      border-radius: var(--radius-full);
+
+      color: var(--md-primary);
+      background: rgba(168,199,250,.08);
+
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* =========================
+       Status
+    ========================= */
+
+    .status-panel {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .status-card {
+      padding: 22px;
+
+      border-radius: var(--radius-medium);
+      border: 1px solid rgba(255,255,255,.07);
+
+      background: var(--md-surface-2);
+    }
+
+    .status-label {
+      color: var(--md-on-surface-variant);
+      font-size: 13px;
+    }
+
+    .status-value {
+      margin-top: 5px;
+
+      font-size: 18px;
+      font-weight: 650;
+    }
+
+    .online {
+      color: var(--md-success);
+    }
+
+    /* =========================
+       Footer
+    ========================= */
+
+    footer {
+      margin-top: 80px;
+
+      padding: 38px 20px 50px;
+
+      border-top: 1px solid rgba(255,255,255,.06);
+
+      text-align: center;
+
+      color: #85898f;
+      font-size: 14px;
+    }
+
+    .footer-title {
+      margin-bottom: 7px;
+
+      color: var(--md-on-surface-variant);
+
+      font-weight: 600;
+    }
+
+    /* =========================
+       Responsive
+    ========================= */
+
+    @media (max-width: 800px) {
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .status-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links a:not(.github-link) {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 90px;
+      }
+
+      .hero h1 {
+        letter-spacing: -2.6px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container,
+      .topbar {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .topbar-wrapper {
+        padding-top: 8px;
+      }
+
+      .topbar {
+        min-height: 58px;
+        border-radius: 22px;
+      }
+
+      .brand-icon {
+        width: 38px;
+        height: 38px;
+      }
+
+      .brand-text {
+        font-size: 14px;
+      }
+
+      .nav-links .github-link {
+        padding: 9px 13px;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+
+      .hero h1 {
+        font-size: clamp(43px, 14vw, 64px);
+        letter-spacing: -2px;
+      }
+
+      .hero-description {
+        font-size: 16px;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .about-card,
+      .project-card {
+        padding: 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<nav>
-    <div class="logo">&lt;/ Nguyen's Space &gt;</div>
-    <div class="nav-links">
+
+  <header class="topbar-wrapper">
+    <nav class="topbar">
+
+      <a class="brand" href="#top">
+        <div class="brand-icon">&lt;/&gt;</div>
+        <span class="brand-text">Nguyen's Space</span>
+      </a>
+
+      <div class="nav-links">
         <a href="#about">关于</a>
         <a href="#skills">技术栈</a>
         <a href="#projects">项目</a>
-        <a href="https://github.com/villager1314">GitHub</a>
-    </div>
-</nav>
-<main class="container">
-<section class="hero">
-    <div class="badge">👋 Welcome to Nguyen's Space</div>
-    <h1>Hello, I'm Nguyen.<br><span class="gradient">Security Researcher &amp; Builder.</span></h1>
-    <p>
+
+        <a
+          class="github-link"
+          href="https://github.com/villager1314"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub ↗
+        </a>
+      </div>
+
+    </nav>
+  </header>
+
+  <main id="top" class="container">
+
+    <section class="hero">
+
+      <div class="hero-badge">
+        <span class="status-dot"></span>
+        Welcome to Nguyen's Space
+      </div>
+
+      <h1>
+        Hello, I'm Nguyen.
+        <br>
+        <span class="gradient-text">
+          Security Researcher & Builder.
+        </span>
+      </h1>
+
+      <p class="hero-description">
         我是 Minh Tu Nguyen（GitHub: @villager1314）。
-        关注 Android 与 Linux 内核安全、CVE 分析、ARM 设备研究，
-        也会开发跨平台工具，把研究过程整理成可复现的开源项目。
-    </p>
-    <div class="buttons">
-        <a class="button primary" href="https://github.com/villager1314">GitHub →</a>
-        <a class="button" href="#projects">查看项目</a>
-    </div>
-</section>
-<section id="about">
-    <h2 class="section-title"><span>01.</span> About Me</h2>
-    <div class="about">
-        <p>我是一名对漏洞研究、Android/Linux 系统与嵌入式设备感兴趣的开发者，喜欢分析底层机制并记录完整的验证过程。</p>
-        <p>目前的项目涵盖 Linux 内核 CVE、Unisoc 芯片平台、RK3566 设备，以及 Android 和 Windows 离线工具。</p>
-    </div>
-</section>
-<section id="skills">
-    <h2 class="section-title"><span>02.</span> Tech Stack</h2>
-    <div class="skills">
+        关注 Android、Linux 内核安全、CVE 分析与 ARM 设备研究，
+        也会开发跨平台工具，并把研究过程整理成可复现的开源项目。
+      </p>
+
+      <div class="hero-actions">
+
+        <a
+          class="md-button filled"
+          href="https://github.com/villager1314"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+          <span>↗</span>
+        </a>
+
+        <a class="md-button tonal" href="#projects">
+          查看项目
+          <span>↓</span>
+        </a>
+
+      </div>
+
+      <div class="hero-meta">
+        <span class="meta-chip">🐧 Linux</span>
+        <span class="meta-chip">🤖 Android</span>
+        <span class="meta-chip">🛡 Kernel Security</span>
+        <span class="meta-chip">⚙ ARM / Embedded</span>
+        <span class="meta-chip">🌐 Open Source</span>
+      </div>
+
+    </section>
+
+    <section id="about">
+
+      <div class="section-heading">
+        <div class="section-number">01</div>
+
+        <div>
+          <h2>About Me</h2>
+          <div class="section-subtitle">
+            Research · Development · Open Source
+          </div>
+        </div>
+      </div>
+
+      <div class="about-card">
+        <p>
+          我是一名对漏洞研究、Android / Linux 系统以及嵌入式设备感兴趣的开发者。
+          相比只关注最终结果，我更喜欢分析系统底层机制，并记录完整、可复现的验证过程。
+        </p>
+
+        <p>
+          目前的研究方向涵盖 Linux 内核 CVE、Unisoc 芯片平台、
+          RK3566 设备研究，以及 Android、Windows 和 Linux 平台上的实用工具。
+        </p>
+      </div>
+
+    </section>
+
+    <section id="skills">
+
+      <div class="section-heading">
+        <div class="section-number">02</div>
+
+        <div>
+          <h2>Tech Stack</h2>
+          <div class="section-subtitle">
+            Technologies I use and explore
+          </div>
+        </div>
+      </div>
+
+      <div class="skills">
         <div class="skill">C</div>
         <div class="skill">Python</div>
         <div class="skill">Linux</div>
@@ -114,39 +921,199 @@ footer {
         <div class="skill">JavaScript</div>
         <div class="skill">Shell</div>
         <div class="skill">Android</div>
-        <div class="skill">Kernel Security</div>
+        <div class="skill">Linux Kernel</div>
+        <div class="skill">ARM</div>
+        <div class="skill">Embedded Systems</div>
+        <div class="skill">Security Research</div>
+      </div>
+
+    </section>
+
+    <section id="projects">
+
+      <div class="section-heading">
+        <div class="section-number">03</div>
+
+        <div>
+          <h2>Projects</h2>
+          <div class="section-subtitle">
+            Selected research and open-source projects
+          </div>
+        </div>
+      </div>
+
+      <div class="projects">
+
+        <a
+          class="project-card"
+          href="https://github.com/villager1314/Viet-Nom"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="project-top">
+            <div class="project-icon">🇻🇳</div>
+            <span class="project-arrow">↗</span>
+          </div>
+
+          <h3>越喃 · Việt Nôm</h3>
+
+          <p>
+            离线越南国语字转汉喃工具，提供 Android 与 Windows 版本，
+            支持内置字体与离线越南语朗读。
+          </p>
+
+          <div class="project-tags">
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag">Android</span>
+            <span class="project-tag">Windows</span>
+          </div>
+        </a>
+
+
+        <a
+          class="project-card"
+          href="https://github.com/villager1314/CVE-2026-64560-Analysis"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="project-top">
+            <div class="project-icon">🛡️</div>
+            <span class="project-arrow">↗</span>
+          </div>
+
+          <h3>CVE-2026-64560 Analysis</h3>
+
+          <p>
+            Linux 内核 posix-cpu-timers 竞态 UAF 的技术分析、
+            修复补丁研究与防御验证型 PoC。
+          </p>
+
+          <div class="project-tags">
+            <span class="project-tag">C</span>
+            <span class="project-tag">Linux Kernel</span>
+            <span class="project-tag">Security</span>
+          </div>
+        </a>
+
+
+        <a
+          class="project-card"
+          href="https://github.com/villager1314/HanVon-N10-touch-2024-rk3566-Archive"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="project-top">
+            <div class="project-icon">📱</div>
+            <span class="project-arrow">↗</span>
+          </div>
+
+          <h3>Hanvon N10 / RK3566</h3>
+
+          <p>
+            汉王 N10 Touch 2024 与 RK3566 平台的设备研究、
+            系统实验以及技术资料归档。
+          </p>
+
+          <div class="project-tags">
+            <span class="project-tag">RK3566</span>
+            <span class="project-tag">Linux</span>
+            <span class="project-tag">Embedded</span>
+          </div>
+        </a>
+
+
+        <a
+          class="project-card"
+          href="https://github.com/villager1314/unisoc-sc9832a-analysis"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="project-top">
+            <div class="project-icon">🔬</div>
+            <span class="project-arrow">↗</span>
+          </div>
+
+          <h3>Unisoc SC9832A Analysis</h3>
+
+          <p>
+            围绕 Unisoc SC9832A 平台整理的设备分析、
+            Android 实验记录与芯片平台研究资料。
+          </p>
+
+          <div class="project-tags">
+            <span class="project-tag">Unisoc</span>
+            <span class="project-tag">Android</span>
+            <span class="project-tag">Research</span>
+          </div>
+        </a>
+
+      </div>
+
+    </section>
+
+    <section id="status">
+
+      <div class="section-heading">
+        <div class="section-number">04</div>
+
+        <div>
+          <h2>System Status</h2>
+          <div class="section-subtitle">
+            Current page information
+          </div>
+        </div>
+      </div>
+
+      <div class="status-panel">
+
+        <div class="status-card">
+          <div class="status-label">Web Service</div>
+          <div class="status-value online">
+            ● Online
+          </div>
+        </div>
+
+        <div class="status-card">
+          <div class="status-label">Protocol</div>
+          <div class="status-value" id="protocol">
+            Loading...
+          </div>
+        </div>
+
+        <div class="status-card">
+          <div class="status-label">Current Host</div>
+          <div class="status-value" id="host">
+            Loading...
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-title">
+      Built with ☕ & curiosity
     </div>
-</section>
-<section id="projects">
-    <h2 class="section-title"><span>03.</span> Projects</h2>
-    <div class="projects">
-        <a class="card" href="https://github.com/villager1314/Viet-Nom">
-            <h3>🇻🇳 越喃 · Việt Nôm</h3>
-            <p>离线越南国语字转汉喃工具，提供 Android 与 Windows 版本，并支持内置字体和离线越南语朗读。</p>
-            <span class="tag">JavaScript · Android · Windows →</span>
-        </a>
-        <a class="card" href="https://github.com/villager1314/CVE-2026-64560-Analysis">
-            <h3>🛡️ CVE-2026-64560 Analysis</h3>
-            <p>Linux 内核 posix-cpu-timers 竞态 UAF 的技术分析、修复补丁与防御验证型 PoC。</p>
-            <span class="tag">C · Linux Kernel · 60 Stars →</span>
-        </a>
-        <a class="card" href="https://github.com/villager1314/HanVon-N10-touch-2024-rk3566-Archive">
-            <h3>📱 Hanvon N10 / RK3566</h3>
-            <p>汉王 N10 Touch 2024 与 RK3566 平台的设备研究和技术资料归档。</p>
-            <span class="tag">Python · RK3566 · MIT →</span>
-        </a>
-        <a class="card" href="https://github.com/villager1314/unisoc-sc9832a-analysis">
-            <h3>🔬 Unisoc SC9832A Analysis</h3>
-            <p>围绕 Unisoc SC9832A 平台整理的设备分析、实验记录与研究资料。</p>
-            <span class="tag">Unisoc · Android · Research →</span>
-        </a>
-    </div>
-</section>
-</main>
-<footer>
-    Built with ☕ &amp; curiosity
-    <br><br>
-    © 2026 · Hosted on GitHub Pages
-</footer>
+
+    © 2026 Nguyen's Space · Open Source & Research
+  </footer>
+
+  <script>
+    const protocolElement =
+      document.getElementById("protocol");
+
+    const hostElement =
+      document.getElementById("host");
+
+    protocolElement.textContent =
+      window.location.protocol.replace(":", "").toUpperCase();
+
+    hostElement.textContent =
+      window.location.host;
+  </script>
+
 </body>
 </html>
